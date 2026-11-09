@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vash.dev/schemas/stack-pack.schema.json",
+  "title": "VASH Stack Pack Manifest",
+  "description": "The manifest at catalog/stacks/<pack>/stack.json.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "Contract version."
+    },
+    "id": {
+      "type": "string",
+      "description": "Pack id (matches folder name)."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name."
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version."
+    },
+    "licence": {
+      "type": "string",
+      "description": "SPDX id."
+    },
+    "description": {
+      "type": "string",
+      "description": "What the pack produces and for whom."
+    },
+    "platform": {
+      "type": "object",
+      "description": "Platform name to version string, or 'to-verify'.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "tools": {
+      "type": "array",
+      "description": "Tools the pack requires.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Tool id."
+          },
+          "version": {
+            "type": "string",
+            "description": "Pinned version."
+          },
+          "version_command": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Argument list to get the installed version."
+          },
+          "checksum": {
+            "type": "string",
+            "description": "Optional SHA-256."
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "version_command"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "parts": {
+      "type": "object",
+      "description": "Which parts are present.",
+      "properties": {
+        "skills": {
+          "$ref": "#/$defs/part"
+        },
+        "rules": {
+          "$ref": "#/$defs/part"
+        },
+        "linters": {
+          "$ref": "#/$defs/part"
+        },
+        "tests": {
+          "$ref": "#/$defs/part"
+        },
+        "deploy": {
+          "$ref": "#/$defs/part"
+        },
+        "ui-tests": {
+          "$ref": "#/$defs/part"
+        },
+        "outputs": {
+          "$ref": "#/$defs/part"
+        }
+      },
+      "required": [
+        "skills",
+        "rules",
+        "linters",
+        "tests",
+        "deploy",
+        "ui-tests",
+        "outputs"
+      ],
+      "additionalProperties": false
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Relative folder paths produced."
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "name",
+    "version",
+    "licence",
+    "description",
+    "platform",
+    "tools",
+    "parts",
+    "outputs"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "part": {
+      "type": "object",
+      "description": "Presence of a pack part.",
+      "properties": {
+        "present": {
+          "type": "boolean",
+          "description": "Whether present."
+        },
+        "reason": {
+          "type": "string",
+          "description": "If absent, why."
+        }
+      },
+      "required": [
+        "present",
+        "reason"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

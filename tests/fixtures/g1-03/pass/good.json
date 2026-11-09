@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "id": "t",
+    "name": "T",
+    "repository": "t/t",
+    "visibility": "private"
+  },
+  "vash": {
+    "version": "3.0.0",
+    "commit": "to-verify"
+  },
+  "stack": {
+    "pack": "design-only",
+    "pack_version": "1.0.0",
+    "platform_version": {}
+  },
+  "forge": {
+    "choice": "github",
+    "settings": {}
+  },
+  "ci": {
+    "choice": "github-actions",
+    "settings": {}
+  },
+  "cloud": {
+    "choice": "none",
+    "settings": {}
+  },
+  "agents": [],
+  "skills": [],
+  "tools": [],
+  "paths": {
+    "allowed_write": []
+  },
+  "models": {
+    "routes": {
+      "local": {
+        "adapter": "ollama",
+        "model": "m",
+        "vendor": "v",
+        "timeout_s": 10
+      },
+      "review": {
+        "adapter": "ollama",
+        "model": "m",
+        "vendor": "v",
+        "timeout_s": 10
+      }
+    },
+    "intake": "local",
+    "coder": "local",
+    "critic": "review"
+  },
+  "thresholds": {},
+  "floor": 88
+}

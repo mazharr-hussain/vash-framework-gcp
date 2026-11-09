@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+
+# VASH specific
+runtime/
+.env
+data/
+.claude/agents/
+.claude/skills/
+.claude/hooks/
+.agents/

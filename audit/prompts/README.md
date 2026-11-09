@@ -1,0 +1,12 @@
+# runtime/prompts/
+
+This folder stores every prompt used to generate VASH artifacts, one file per task.
+
+## Naming convention
+[task_id]_prompt.md
+Example: 0.1_prompt.md
+
+## Rules
+- Prompt must be saved here BEFORE the artifact generation begins
+- Never skip saving a prompt
+- If a prompt is revised between AvA rounds, save each version with a round suffix: [task_id]_prompt_r2.md

@@ -1,0 +1,36 @@
+name: VASH Merge Gate
+
+on:
+  workflow_call:
+    inputs:
+      approval_label:
+        required: false
+        type: string
+        default: approved
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+        with:
+          repository: mazharr-hussain/vash-framework
+          path: .vash
+      - name: Set up Python
+        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5.0.0
+        with:
+          python-version: '3.11'
+      - name: Install VASH
+        run: pip install ./.vash
+      - name: Check Label
+        env:
+          LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+          REQ_LABEL: ${{ inputs.approval_label }}
+        run: |
+          if [[ ",$LABELS," != *",$REQ_LABEL,"* ]]; then
+            echo "Missing required label: $REQ_LABEL"
+            exit 1
+          fi
+      - name: Check ADRs
+        run: python -m vash.tools.check_stack --repo .

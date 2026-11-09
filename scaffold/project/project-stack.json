@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "id": "new-project",
+    "name": "New Project",
+    "repository": "owner/new-project",
+    "visibility": "private"
+  },
+  "vash": {
+    "version": "3.0.0",
+    "commit": "to-verify"
+  },
+  "stack": {
+    "pack": "design-only",
+    "pack_version": "1.0.0",
+    "platform_version": {}
+  },
+  "forge": {
+    "choice": "github",
+    "settings": {
+      "repo": "owner/new-project"
+    }
+  },
+  "ci": {
+    "choice": "github-actions",
+    "settings": {
+      "repo": "owner/new-project"
+    }
+  },
+  "cloud": {
+    "choice": "none",
+    "settings": {}
+  },
+  "agents": [],
+  "skills": [],
+  "tools": [],
+  "paths": {
+    "allowed_write": [
+      "src/**",
+      "database/**"
+    ]
+  },
+  "models": {
+    "routes": {
+      "local": {
+        "adapter": "ollama",
+        "model": "qwen2.5-coder:7b",
+        "vendor": "local",
+        "timeout_s": 60
+      },
+      "review": {
+        "adapter": "ollama",
+        "model": "qwen2.5-coder:7b",
+        "vendor": "local-b",
+        "timeout_s": 60
+      }
+    },
+    "intake": "local",
+    "coder": "local",
+    "critic": "review",
+    "fallback": "local"
+  },
+  "thresholds": {
+    "code": 90,
+    "artifact": 88,
+    "feature": 88
+  },
+  "floor": 88
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "id": "template",
+  "name": "Template Pack",
+  "version": "1.0.0",
+  "licence": "MIT",
+  "description": "A template stack pack.",
+  "platform": {},
+  "tools": [],
+  "parts": {
+    "skills": {"present": false, "reason": ""},
+    "rules": {"present": false, "reason": ""},
+    "linters": {"present": false, "reason": ""},
+    "tests": {"present": false, "reason": ""},
+    "deploy": {"present": false, "reason": ""},
+    "ui-tests": {"present": false, "reason": ""},
+    "outputs": {"present": false, "reason": ""}
+  },
+  "outputs": []
+}

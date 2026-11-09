@@ -1,0 +1,6 @@
+[allowlist]
+description = "Allow fake test fixtures"
+paths = [
+    '''tests/fixtures/''',
+    '''tests/engine/test_gate1.py''',
+]

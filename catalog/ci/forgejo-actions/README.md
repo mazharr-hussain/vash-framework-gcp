@@ -1,0 +1,3 @@
+# Forgejo Actions
+
+Pipeline template.

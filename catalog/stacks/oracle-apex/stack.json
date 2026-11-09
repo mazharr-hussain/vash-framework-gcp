@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "id": "oracle-apex",
+  "name": "Oracle APEX",
+  "version": "1.0.0",
+  "licence": "MIT",
+  "description": "Oracle APEX and PL/SQL.",
+  "platform": {
+    "Oracle APEX": "to-verify",
+    "Oracle Database": "to-verify"
+  },
+  "tools": [],
+  "parts": {
+    "skills": {"present": true, "reason": ""},
+    "rules": {"present": true, "reason": ""},
+    "linters": {"present": true, "reason": ""},
+    "tests": {"present": true, "reason": ""},
+    "deploy": {"present": true, "reason": ""},
+    "ui-tests": {"present": true, "reason": ""},
+    "outputs": {"present": true, "reason": ""}
+  },
+  "outputs": [
+    "outputs/apex",
+    "outputs/database",
+    "outputs/tests"
+  ]
+}

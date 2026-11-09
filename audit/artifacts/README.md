@@ -1,0 +1,12 @@
+# runtime/artifacts/
+
+This folder stores every completed VASH artifact that has passed AvA review.
+
+## Naming convention
+[task_id]_artifact.md
+Example: 0.1_artifact.md
+
+## Rules
+- Only approved artifacts live here
+- Never summarise — full content always
+- Artifacts are the source of truth for each completed activity

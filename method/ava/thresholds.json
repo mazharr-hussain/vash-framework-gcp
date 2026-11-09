@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "floor": 88,
+  "thresholds": {
+    "artifact": 88,
+    "code": 90,
+    "manual_step": 88,
+    "prompt": 88,
+    "ava": 88,
+    "feature": 88
+  },
+  "rule": "a project may raise a threshold, never lower it; none below the floor"
+}

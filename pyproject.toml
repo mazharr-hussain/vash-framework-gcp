@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=77.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vash"
+version = "3.0.0"
+description = "VASH - Virtual AI Software House Engine"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    {name = "Mazhar Hussain"}
+]
+dependencies = ["jsonschema>=4.18,<5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "build", "skills-ref>=0.1.1,<0.2"]
+skills = ["skills-ref>=0.1.1,<0.2"]
+
+[project.scripts]
+vash = "vash.cli.main:cli"
+
+[project.urls]
+Repository = "https://github.com/mazharr-hussain/vash-framework"
+Issues = "https://github.com/mazharr-hussain/vash-framework/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]

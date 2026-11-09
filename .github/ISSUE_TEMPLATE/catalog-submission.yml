@@ -1,0 +1,49 @@
+name: Catalog submission
+description: Submit a new tool
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Tool name
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Upstream URL
+    validations:
+      required: true
+  - type: input
+    id: licence
+    attributes:
+      label: SPDX licence
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - llm
+        - forge
+        - ci
+        - cloud
+        - stack
+        - skill
+        - agent
+    validations:
+      required: true
+  - type: textarea
+    id: search
+    attributes:
+      label: LAW 3 search done
+      description: What did you search for, and what did you find?
+    validations:
+      required: true
+  - type: textarea
+    id: terms
+    attributes:
+      label: Data-use terms
+      description: What are the data-use terms?
+    validations:
+      required: true

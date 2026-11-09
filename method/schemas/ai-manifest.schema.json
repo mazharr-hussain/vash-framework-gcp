@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vash.dev/schemas/ai-manifest.schema.json",
+  "title": "VASH AI Manifest",
+  "description": "Catalog index of accepted assets, generated from catalog entry front-matter.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "Contract version."
+    },
+    "licences_allowed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "SPDX ids allowed."
+    },
+    "entries": {
+      "type": "array",
+      "description": "Accepted assets.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique catalog id."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "stack-pack",
+              "skill",
+              "agent",
+              "tool",
+              "rule-set"
+            ],
+            "description": "Asset type."
+          },
+          "source": {
+            "type": "string",
+            "description": "Upstream repo or index."
+          },
+          "fork": {
+            "type": "string",
+            "description": "Path under catalog/external/ or skills/."
+          },
+          "licence": {
+            "type": "string",
+            "description": "SPDX id verified by licence verifier."
+          },
+          "use": {
+            "type": "string",
+            "enum": [
+              "fork",
+              "run"
+            ],
+            "description": "'fork' if copied/linked; 'run' if executed unmodified."
+          },
+          "version": {
+            "type": "string",
+            "description": "Pinned version."
+          },
+          "commit": {
+            "type": "string",
+            "description": "Pinned commit SHA."
+          },
+          "stacks": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Applicable packs (empty = neutral)."
+          },
+          "adr": {
+            "type": "string",
+            "description": "Catalog ADR that accepted it."
+          },
+          "search_log": {
+            "type": "string",
+            "description": "LAW 3 search record."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "candidate",
+              "accepted",
+              "deprecated"
+            ],
+            "description": "Only 'accepted' may be frozen."
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "source",
+          "licence",
+          "use",
+          "version",
+          "commit",
+          "status"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "licences_allowed",
+    "entries"
+  ],
+  "additionalProperties": false
+}

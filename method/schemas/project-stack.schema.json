@@ -1,0 +1,513 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://vash.dev/schemas/project-stack.schema.json",
+  "title": "VASH Project Stack Freeze",
+  "description": "The freeze file written by the engine from an ACCEPTED stack ADR. Never edited by hand.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "Version of this contract."
+    },
+    "project": {
+      "type": "object",
+      "description": "Project identity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique project id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable project name."
+        },
+        "repository": {
+          "type": "string",
+          "description": "Owner/name of the project repository."
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "public",
+            "private"
+          ],
+          "description": "Repository visibility."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "repository",
+        "visibility"
+      ],
+      "additionalProperties": false
+    },
+    "vash": {
+      "type": "object",
+      "description": "Pinned VASH release.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Release tag (e.g. 3.0.0)."
+        },
+        "commit": {
+          "type": "string",
+          "description": "Commit SHA of the tag, or 'to-verify'."
+        }
+      },
+      "required": [
+        "version",
+        "commit"
+      ],
+      "additionalProperties": false
+    },
+    "stack": {
+      "type": "object",
+      "description": "Chosen stack pack.",
+      "properties": {
+        "pack": {
+          "type": "string",
+          "description": "Stack pack id from catalog/stacks/."
+        },
+        "pack_version": {
+          "type": "string",
+          "description": "Version of the pack."
+        },
+        "platform_version": {
+          "type": "object",
+          "description": "Platform name to version string, or 'to-verify'.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "pack",
+        "pack_version",
+        "platform_version"
+      ],
+      "additionalProperties": false
+    },
+    "forge": {
+      "type": "object",
+      "description": "Git host choice.",
+      "properties": {
+        "choice": {
+          "type": "string",
+          "description": "Catalog id (github, gitlab, forgejo, local)."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Adapter-specific settings."
+        }
+      },
+      "required": [
+        "choice",
+        "settings"
+      ],
+      "additionalProperties": false
+    },
+    "ci": {
+      "type": "object",
+      "description": "CI/CD choice.",
+      "properties": {
+        "choice": {
+          "type": "string",
+          "description": "Catalog id (github-actions, local-hooks, ...)."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Adapter-specific settings."
+        }
+      },
+      "required": [
+        "choice",
+        "settings"
+      ],
+      "additionalProperties": false
+    },
+    "cloud": {
+      "type": "object",
+      "description": "Cloud choice; 'none' when not provisioning.",
+      "properties": {
+        "choice": {
+          "type": "string",
+          "description": "Catalog id or 'none'."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Adapter-specific settings."
+        }
+      },
+      "required": [
+        "choice",
+        "settings"
+      ],
+      "additionalProperties": false
+    },
+    "agents": {
+      "type": "array",
+      "description": "Agent personas loaded.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Catalog agent id."
+          },
+          "source": {
+            "type": "string",
+            "description": "Catalog path or upstream URL."
+          },
+          "commit": {
+            "type": "string",
+            "description": "Pinned commit SHA."
+          },
+          "licence": {
+            "type": "string",
+            "description": "SPDX id."
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "commit",
+          "licence"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "skills": {
+      "type": "array",
+      "description": "Skills loaded.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Catalog skill id."
+          },
+          "source": {
+            "type": "string",
+            "description": "Catalog path or upstream URL."
+          },
+          "commit": {
+            "type": "string",
+            "description": "Pinned commit SHA."
+          },
+          "licence": {
+            "type": "string",
+            "description": "SPDX id."
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "commit",
+          "licence"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "tools": {
+      "type": "array",
+      "description": "MCP servers and CLIs allowed.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Tool id."
+          },
+          "version": {
+            "type": "string",
+            "description": "Pinned version."
+          },
+          "checksum": {
+            "type": "string",
+            "description": "Optional SHA-256."
+          }
+        },
+        "required": [
+          "id",
+          "version"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "paths": {
+      "type": "object",
+      "description": "Filesystem write permissions.",
+      "properties": {
+        "allowed_write": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Glob patterns MCP write may modify."
+        }
+      },
+      "required": [
+        "allowed_write"
+      ],
+      "additionalProperties": false
+    },
+    "models": {
+      "type": "object",
+      "description": "LLM routing.",
+      "properties": {
+        "routes": {
+          "type": "object",
+          "description": "Named routes.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "adapter": {
+                "type": "string",
+                "description": "Adapter id."
+              },
+              "model": {
+                "type": "string",
+                "description": "Model name."
+              },
+              "vendor": {
+                "type": "string",
+                "description": "Vendor id."
+              },
+              "base_url": {
+                "type": "string",
+                "description": "API base URL."
+              },
+              "key_env": {
+                "type": "string",
+                "description": "Env var name for API key."
+              },
+              "timeout_s": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Request timeout."
+              }
+            },
+            "required": [
+              "adapter",
+              "model",
+              "vendor",
+              "timeout_s"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "intake": {
+          "type": "string",
+          "description": "Route for intake (local only)."
+        },
+        "coder": {
+          "type": "string",
+          "description": "Route for Coder."
+        },
+        "critic": {
+          "type": "string",
+          "description": "Route for Critic (different vendor unless owner_exception=OD-1)."
+        },
+        "fallback": {
+          "type": "string",
+          "description": "Route for fallback (local)."
+        }
+      },
+      "required": [
+        "routes",
+        "intake",
+        "coder",
+        "critic"
+      ],
+      "additionalProperties": false
+    },
+    "thresholds": {
+      "type": "object",
+      "description": "Per-type thresholds (88-100).",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 88,
+        "maximum": 100
+      }
+    },
+    "floor": {
+      "type": "integer",
+      "minimum": 88,
+      "maximum": 100,
+      "description": "Global floor; no threshold may be lower."
+    },
+    "limits": {
+      "type": "object",
+      "description": "Fix-loop limits.",
+      "properties": {
+        "max_retries": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Max fix attempts before escalation."
+        }
+      },
+      "required": [
+        "max_retries"
+      ],
+      "additionalProperties": false
+    },
+    "canary": {
+      "type": "object",
+      "description": "Canary settings.",
+      "properties": {
+        "interval": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Rounds between canary checks."
+        },
+        "max_misses": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Consecutive misses before escalating."
+        }
+      },
+      "required": [
+        "interval",
+        "max_misses"
+      ],
+      "additionalProperties": false
+    },
+    "runners": {
+      "type": "object",
+      "description": "Runner labels.",
+      "properties": {
+        "light": {
+          "type": "string",
+          "description": "Light job label."
+        },
+        "heavy": {
+          "type": "string",
+          "description": "Heavy job label."
+        }
+      },
+      "required": [
+        "light",
+        "heavy"
+      ],
+      "additionalProperties": false
+    },
+    "budget": {
+      "type": "object",
+      "description": "Monthly cost-meter budget.",
+      "properties": {
+        "minutes_month": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "storage_mb": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tokens_month": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "warn_pct": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "switch_pct": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      },
+      "required": [
+        "minutes_month",
+        "storage_mb",
+        "tokens_month",
+        "warn_pct",
+        "switch_pct"
+      ],
+      "additionalProperties": false
+    },
+    "gates": {
+      "type": "object",
+      "description": "Gate enforcement.",
+      "properties": {
+        "merge": {
+          "type": "string",
+          "enum": [
+            "human-approval-label",
+            "human-review"
+          ],
+          "description": "How human merge approval is enforced (LAW 2). 'auto' not allowed."
+        }
+      },
+      "required": [
+        "merge"
+      ],
+      "additionalProperties": false
+    },
+    "licences_allowed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Project-narrowed SPDX allow-list."
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "ADR ids this freeze was written from."
+    },
+    "owner_exception": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "'OD-1' for VASH's own dev; null for projects."
+    },
+    "delivery": {
+      "type": "object",
+      "description": "How work is delivered. Optional; without it the mode is phased (Phases 1-8, then execution).",
+      "properties": {
+        "mode": {
+          "type": "string",
+          "enum": [
+            "phased",
+            "iterative"
+          ],
+          "description": "phased: full design path first. iterative: inception once, then one feature loop per work item (method/sdlc/iteration-mode.md)."
+        },
+        "iteration_days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 30,
+          "description": "Length of one iteration (sprint) in days, iterative mode only."
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "project",
+    "vash",
+    "stack",
+    "forge",
+    "ci",
+    "cloud",
+    "agents",
+    "skills",
+    "tools",
+    "paths",
+    "models",
+    "thresholds",
+    "floor"
+  ],
+  "additionalProperties": false
+}

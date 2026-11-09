@@ -1,0 +1,181 @@
+{
+  "schema_version": "1.0",
+  "project": {
+    "id": "vash",
+    "name": "VASH Framework",
+    "repository": "mazharr-hussain/vash-framework",
+    "visibility": "public"
+  },
+  "vash": {
+    "version": "3.0.0",
+    "commit": "to-verify"
+  },
+  "stack": {
+    "pack": "design-only",
+    "pack_version": "1.0.0",
+    "platform_version": {}
+  },
+  "forge": {
+    "choice": "github",
+    "settings": {
+      "repo": "mazharr-hussain/vash-framework"
+    }
+  },
+  "ci": {
+    "choice": "github-actions",
+    "settings": {
+      "repo": "mazharr-hussain/vash-framework"
+    }
+  },
+  "cloud": {
+    "choice": "none",
+    "settings": {}
+  },
+  "agents": [
+    {
+      "id": "junior-creator",
+      "source": "catalog/agents/junior-creator.md",
+      "commit": "to-verify",
+      "licence": "MIT"
+    },
+    {
+      "id": "senior-validator",
+      "source": "catalog/agents/senior-validator.md",
+      "commit": "to-verify",
+      "licence": "MIT"
+    },
+    {
+      "id": "prompt-engineer",
+      "source": "catalog/agents/prompt-engineer.md",
+      "commit": "to-verify",
+      "licence": "MIT"
+    }
+  ],
+  "skills": [
+    {
+      "id": "vash-creator",
+      "source": "catalog/skills/vash-creator/SKILL.md",
+      "commit": "to-verify",
+      "licence": "MIT"
+    },
+    {
+      "id": "vash-validator",
+      "source": "catalog/skills/vash-validator/SKILL.md",
+      "commit": "to-verify",
+      "licence": "MIT"
+    },
+    {
+      "id": "vash-orchestrator",
+      "source": "catalog/skills/vash-orchestrator/SKILL.md",
+      "commit": "to-verify",
+      "licence": "MIT"
+    },
+    {
+      "id": "prompt-engineering",
+      "source": "catalog/skills/prompt-engineering/SKILL.md",
+      "commit": "to-verify",
+      "licence": "MIT"
+    },
+    {
+      "id": "code-reviewer",
+      "source": "catalog/skills/code-reviewer/SKILL.md",
+      "commit": "to-verify",
+      "licence": "MIT"
+    },
+    {
+      "id": "senior-architect",
+      "source": "catalog/skills/senior-architect/SKILL.md",
+      "commit": "to-verify",
+      "licence": "MIT"
+    },
+    {
+      "id": "multi-agent-patterns",
+      "source": "catalog/skills/multi-agent-patterns/SKILL.md",
+      "commit": "to-verify",
+      "licence": "MIT"
+    },
+    {
+      "id": "canary-verifier",
+      "source": "catalog/skills/canary-verifier/SKILL.md",
+      "commit": "to-verify",
+      "licence": "MIT"
+    }
+  ],
+  "tools": [],
+  "paths": {
+    "allowed_write": [
+      "method/**",
+      "catalog/**",
+      "src/**",
+      "tests/**",
+      "docs/**",
+      "plan/**",
+      "audit/**",
+      "bin/**",
+      "scaffold/**",
+      "iac/**"
+    ]
+  },
+  "models": {
+    "routes": {
+      "anthropic-coder": {
+        "adapter": "openai_compatible",
+        "model": "claude-sonnet-5-5",
+        "vendor": "anthropic",
+        "base_url": "https://api.anthropic.com/v1",
+        "key_env": "ANTHROPIC_API_KEY",
+        "timeout_s": 120
+      },
+      "anthropic-critic": {
+        "adapter": "openai_compatible",
+        "model": "claude-opus-5-5",
+        "vendor": "anthropic",
+        "base_url": "https://api.anthropic.com/v1",
+        "key_env": "ANTHROPIC_API_KEY",
+        "timeout_s": 120
+      },
+      "local": {
+        "adapter": "ollama",
+        "model": "qwen2.5-coder:7b",
+        "vendor": "local",
+        "timeout_s": 60
+      }
+    },
+    "intake": "local",
+    "coder": "anthropic-coder",
+    "critic": "anthropic-critic",
+    "fallback": "local"
+  },
+  "thresholds": {
+    "artifact": 88,
+    "code": 90,
+    "manual_step": 88,
+    "prompt": 88,
+    "ava": 88,
+    "feature": 88
+  },
+  "floor": 88,
+  "limits": {
+    "max_retries": 3
+  },
+  "canary": {
+    "interval": 10,
+    "max_misses": 2
+  },
+  "runners": {
+    "light": "ubuntu-latest",
+    "heavy": "self-hosted"
+  },
+  "budget": {
+    "minutes_month": 2000,
+    "storage_mb": 500,
+    "tokens_month": 0,
+    "warn_pct": 70,
+    "switch_pct": 90
+  },
+  "gates": {
+    "merge": "human-approval-label"
+  },
+  "decisions": [],
+  "owner_exception": "OD-1"
+}

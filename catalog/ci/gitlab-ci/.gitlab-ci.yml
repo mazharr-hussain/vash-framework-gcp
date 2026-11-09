@@ -1,0 +1,7 @@
+stages:
+  - test
+test:
+  stage: test
+  script:
+    - pip install -e .[dev]
+    - pytest -q

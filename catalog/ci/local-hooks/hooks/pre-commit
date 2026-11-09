@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+python3 -m vash.cli check --repo .
+python3 -m vash.tools.gate1 .
